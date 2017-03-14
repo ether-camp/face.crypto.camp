@@ -1091,7 +1091,7 @@ function loadAvatar() {
 
 var parts = ["backs", "clothes", "ears", "eyebrows", "eyesfront", "eyesiris", "faceshape", "glasses", "hair", "mouth", "nose", "beard", "mustache"];
 var partsColors = ["backs", "clothes", "eyebrows", "eyesiris", "faceshape", "glasses", "hair", "mouth", "beard", "mustache"];
-var partsPositions = ["ears", "eyebrows", "eyesfront", "eyesiris", "glasses", "mouth", "nose"];
+var partsPositions = ["ears", "eyebrows", "eyesfront", "eyesiris", "glasses", "mouth", "nose", "beard", "mustache"];
 
 var encodedAvatar = {};
 var gender = decoded[0][0] - 48 == 1 ? "boys" : "girls";
