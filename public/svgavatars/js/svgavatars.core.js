@@ -21,37 +21,7 @@ window.addEventListener('load', function() {
 
 
 //Global options
-var path_to_folder = '/svgavatars/',//the path to main SVG Avatars folder from root dir of your site. The slashes "/" are important!
-	delta_sat = 0.1, //the step of saturation color change in HSV (HSB) mode (10% by default)
-	delta_val = 0.06, //the step of value (brightness) color change in HSV (HSB) mode (6% by default)
-	save_format = 'png', //must be exactly 'png' or 'svg' for storing on a server
-	save_size = 500, //the dimentions for avatar stored on a server (pixels)
-	svg_download_size = 600, //the conditional dimentions of SVG file when download by user (pixels)
-	png_one_download_size = 500, //the dimentions of first option PNG file when download by user (pixels)
-	png_two_download_size = 400, //the dimentions of second option PNG file when download by user (pixels)
-	png_ios_download_size = 500, //the dimentions of PNG file when download by user on iOS devices (pixels)
-	png_win8tablet_download_size = 400, //the dimentions of PNG file when download by user on Win8 phones and tablets (pixels)
-	gravatar_size = 200,//the dimentions of PNG file for Gravatar service (pixels)
-	hide_save = true, //true will disable save on your server option
-	hide_svg_download_on_Android = true, //true will disable download SVG option on Android devices (not useful)
-	hide_svg_download = true, //true will disable download SVG option
-	hide_png_one_download = false, //true will disable download PNG with first dimensions
-	hide_png_two_download = false, //true will disable download PNG with second dimensions
-	hide_gravatar = false, //true will disable the possibility to install created avatar as gravatar
-	color_theme = 'dark'; //must be exactly 'light' or 'dark'
-
-//Share options
-var	hide_share = false, //true will disable share option
-	share_image_size = 500, //the dimentions of PNG file for share with Social networks (pixels)
-	facebook_app_id = 'replace me!', //you must have an Facebook's App ID for correct work of share function (https://developers.facebook.com/apps)
-	facebook = true, //false will disable Facebook share option
-	twitter = true, //false will disable Twitter share option
-	pinterest = true, //false will disable Pinterest share option
-	googleplus = true, //false will disable Google Plus share option
-	share_link = document.URL, //will be an URL of a HTML page where the generator is placed
-	share_title = document.title, //will be the title tag of a HTML page where the generator is placed
-	share_description = '', //if you leave it blank, it might be taken from your meta description tag
-	share_credit = 'Created on YourSite.com';//replase YourSite.com with yours or leave it blank (do NOT delete variable itself!), if you don't want a watermark on avatar for Social share
+var color_theme = 'dark'; //must be exactly 'light' or 'dark'
 
 //Calling the func with translation.
 //It must be defined in HTML file above this file like so:
@@ -66,42 +36,6 @@ var resetAvatar;
 
 //Extend SVGJS lib with special methods for controls
 SVG.extend(SVG.Element, {
-	svgaCenterScale: function(sx, sy) {
-		var temp = this.bbox();
-		var cx = temp.cx,
-			cy = temp.cy;
-		if (!sy) {sy = sx};
-		return this.transform({
-			a: sx,
-			b: 0,
-			c: 0,
-			d: sy,
-			e: cx - sx * cx,
-			f: cy - sy * cy
-		});
-	},
-	svgaLeft: function(times, step) {
-		var times = times ? times : 3,
-				step = step ? step : lr_step,
-				leftright = this.data('leftright'),
-				updown = this.data('updown');
-		if ( leftright > -(times*step) ) {
-			this.move(leftright-step, updown);
-			this.data('leftright', leftright-step-0.0000001);
-		};
-		return this;
-	},
-	svgaRight: function(times, step) {
-		var times = times ? times : 3,
-				step = step ? step : lr_step,
-				leftright = this.data('leftright'),
-				updown = this.data('updown');
-		if ( leftright < times*step ) {
-			this.move(leftright+step, updown);
-			this.data('leftright', leftright+step+0.0000001);
-		};
-		return this;
-	},
 	svgaUp: function(times, step) {
 		var times = times ? times : 3,
 				step = step ? step : ud_step,
@@ -126,55 +60,6 @@ SVG.extend(SVG.Element, {
 			return true;
 		};
 		return false;
-	},
-	svgaScaleUp: function(times, stepX, stepY) {
-		var times = times ? times : 3,
-				stepX = stepX ? stepX : scale_step,
-				stepY = stepY ? stepY : stepX,
-				scaleX = this.data('scaleX')+0.0000001,
-				scaleY = this.data('scaleY')+0.0000001;
-		if ( scaleX < 1+times*stepX ) {
-			this.svgaCenterScale(scaleX+stepX, scaleY+stepY);
-			this.data('scaleX', scaleX+stepX+0.00000011);
-			this.data('scaleY', scaleY+stepY+0.00000011);
-		};
-		return this;
-	},
-	svgaScaleDown: function(times,stepX,stepY) {
-		var times = times ? times : 3,
-				stepX = stepX ? stepX : scale_step,
-				stepY = stepY ? stepY : stepX,
-				scaleX = this.data('scaleX')-0.0000001,
-				scaleY = this.data('scaleY')-0.0000001;
-		if ( scaleX > 1-times*stepX ) {
-			this.svgaCenterScale(scaleX-stepX, scaleY-stepY);
-			this.data('scaleX', scaleX-stepX-0.00000011);
-			this.data('scaleY', scaleY-stepY-0.00000011);
-		};
-		return this;
-	},
-	svgaRotateLeft: function(times, step, cx, cy) {
-		var times = times ? times : 2,
-				step = step ? step : rotate_step,
-				rotate = this.data('rotate');
-		if ( rotate > -(times*step) ) {
-			this.rotate(rotate-step-0.0000001, cx, cy);
-			this.data('rotate', rotate-step);
-		};
-		return this;
-	},
-	svgaRotateRight: function(times, step, cx, cy) {
-		var times = times ? times : 2,
-				step = step ? step : rotate_step,
-				rotate = this.data('rotate');
-		if ( rotate < times*step ) {
-			this.rotate(rotate+step+0.0000001, cx, cy);
-			this.data('rotate', rotate+step);
-		};
-		return this;
-	},
-	svgaCancelRotate: function() {
-		return this.rotate(0.0000001).data('rotate',0.0000001,true);
 	}
 });
 
@@ -210,70 +95,6 @@ switch (color_theme) {
 	}
 };
 
-//exit from script if SVG is not supported
-if (!SVG.supported) {
-	return;
-};
-
-//hiding unwanted options
-if (hide_save) {
-	$('#svga-saveavatar').remove();
-};
-if (hide_share) {
-	$('#svga-shareavatar').remove();
-};
-if (hide_svg_download && hide_png_one_download && hide_png_two_download) {
-	$('#svga-downloadavatar').remove();
-} else {
-	if (hide_png_one_download) {
-		$('#svga-png-one').remove();
-	};
-	if (hide_png_two_download) {
-		$('#svga-png-two').remove();
-	};
-	if (hide_svg_download) {
-		$('#svga-svgfile').remove();
-	};
-};
-if (hide_gravatar) {
-	$('#svga-gravataravatar').remove();
-};
-
-//hiding unwanted share services
-if (!facebook) {
-	$('#svga-share-facebook').remove();
-};
-if (!twitter) {
-	$('#svga-share-twitter').remove();
-};
-if (!pinterest) {
-	$('#svga-share-pinterest').remove();
-};
-if (!googleplus) {
-	$('#svga-share-googleplus').remove();
-};
-
-//iOS Safari doesn't allow to force download any files, so it's not possible to save an SVG file.
-//Also only one PNG dimensions will be available for download when '#svga-downloadavatar' is taped.
-if (iOS) {
-	$('#svga-container').removeClass('svga-no-touch');
-	$('#svga-downloadavatar > ul').remove();
-};
-//Hide SVG download on Android devices
-if (Android && hide_svg_download_on_Android) {
-	$('#svga-svgfile').remove();
-};
-//Add special class for Opera browser
-if (Opera) {
-	$('#svga-container').addClass('svga-opera');
-};
-//Add special class and download option for Win8 phones and tablets
-//Win phones doesn't correctly work with hover event and 
-//doesn't allow to swipe the content (colors, graphic parts, etc.) in mobile view (breakpoint 481px)
-if (Win8tablet) {
-	$('#svga-container').addClass('svga-win8tablet');
-	$('#svga-downloadavatar > ul').remove();
-};
 
 //icons on start screen init
 $('#svga-start-boys').append('<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 80 80"><path class="svga-icon-boy" d="M73.22,72.6c-1.05-6.99-8.49-9.28-14.35-10.97c-3.07-0.89-6.98-1.58-9.48-3.72C47.3,56.13,47.5,50.9,49,49.8c3.27-2.39,5.26-7.51,6.14-11.25c0.25-1.07-0.36-0.46,0.81-0.64c0.71-0.11,2.13-2.3,2.64-3.21c1.02-1.83,2.41-4.85,2.42-8.02c0.01-2.23-1.09-2.51-2.41-2.29c-0.43,0.07-0.93,0.21-0.93,0.21c1.42-1.84,1.71-8.22-0.67-13.4C53.56,3.71,44.38,2,40,2c-2.35,0-7.61,1.63-7.81,3.31c-3.37,0.19-7.7,2.55-9.2,5.89c-2.41,5.38-1.48,11.4-0.68,13.4c0,0-0.5-0.14-0.93-0.21c-1.32-0.21-2.42,0.07-2.41,2.29c0.01,3.16,1.41,6.19,2.43,8.02c0.51,0.91,1.93,3.1,2.64,3.21c1.17,0.18,0.56-0.42,0.81,0.64c0.89,3.74,3.09,9.03,6.14,11.25c1.69,2.04,1.7,6.33-0.39,8.11c-2.84,2.43-7.37,3.07-10.84,4.12c-5.86,1.77-13.29,4.9-13.27,12.25C6.51,76.73,7.7,78,10.13,78h59.74c2.43,0,3.68-1.27,3.63-3.72C73.5,74.28,73.4,73.81,73.22,72.6C72.63,68.73,73.4,73.81,73.22,72.6z"/></svg>');
@@ -281,18 +102,18 @@ $('#svga-start-girls').append('<svg version="1.1" xmlns="http://www.w3.org/2000/
 
 getLastAvatars(true);
 
-function chooseBoys() {
+function choose(boys) {
 	$('#svga-gender').hide();
 	$('#svga-elements').empty();
-	$('#svga-colors').empty();	
+	$('#svga-colors').empty();
 
 	setTimeout(function(){
 		$.ajax({
-			url: path_to_folder + 'json/svgavatars-male-data.json',
+			url: path_to_folder + (boys ? 'json/svgavatars-male-data.json' : 'json/svgavatars-female-data.json'),
 			async: false,
 			dataType: 'json',
 			success: function (data) {
-				svgAvatars('boys', data);
+				svgAvatars(boys ? 'boys' : 'girls', data);
 				$('#svga-start-overlay').hide();
 			},
 			error: function(){
@@ -306,29 +127,12 @@ function chooseBoys() {
 	},50);
 }
 
-function chooseGirls() {
-	$('#svga-gender').hide();
-	$('#svga-elements').empty();
-	$('#svga-colors').empty();	
+function chooseBoys() {
+	choose(true);
+}
 
-	setTimeout(function(){
-		$.ajax({
-			url: path_to_folder + 'json/svgavatars-female-data.json',
-			async: false,
-			dataType: 'json',
-			success: function (data) {
-				svgAvatars('girls', data);
-				$('#svga-start-overlay').hide();								
-			},
-			error: function(){
-				$('#svga-message-text').html(alert_json_error).addClass('svga-error');
-				$('#svga-loader').hide();
-				$('.svga-close').hide();
-				$('#svga-work-overlay').fadeIn('fast');
-				$('#svga-message').fadeIn('fast');
-			}
-		});
-	},50);
+function chooseGirls() {
+	choose(false);
 }
 
 chooseBoys();
@@ -660,11 +464,6 @@ for (var cont in icons_data) {
 //creating icons in menu (random, reset, save, download)
 for (var i = 0; i < menu_names.length; i++) {
 	$('#svga-'+menu_names[i]+'avatar > div').append('<svg class="svga-menu-icon" xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28 28" preserveAspectRatio="xMinYMin meet"><path class="svga-menu-icon-path" d="'+ icons_data[menu_names[i]] +'"/></svg>');
-};
-
-//creating socials icons svga-facebook-icon
-for (var i = 0; i < share_names.length; i++) {
-	$('#svga-'+share_names[i]+'-icon').append('<svg class="svga-share-icons" xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" preserveAspectRatio="xMinYMin meet"><path class="svga-share-icons-path" fill="' + share_colors[i] + '" d="'+ icons_data[share_names[i]] +'"/></svg>');
 };
 
 //drawing all elements thumbnails
@@ -1048,7 +847,6 @@ function assignShapeClickHandlers() {
 }
 
 assignShapeClickHandlers();
-
 
 $('.svga-glob-controls').unbind();
 
