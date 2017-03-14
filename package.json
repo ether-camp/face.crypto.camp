@@ -1,0 +1,26 @@
+{
+  "name": "face.crypto.camp",
+  "version": "0.0.1",
+  "main": "web.js",
+  "dependencies": {
+    "express": "3.1.1",
+    "guid": "0.0.10",
+    "child-process": "*",
+    "fs": "*",
+    "http": "*",
+    "querystring": "*",
+    "ethereumjs-abi": "*",
+    "ethereumjs-util": "*",
+    "phantomjs": "*",
+    "guid": "*",
+    "body-parser": "*",
+    "html": "*",
+    "ejs": "*",
+    "redis": "*"
+  },
+  "engines": {
+    "node": "6.9.4",
+    "npm": "4.3.0"
+  },
+  "devDependencies": {}
+}

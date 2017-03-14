@@ -1,0 +1,1572 @@
+/*******************************************************************************************
+ * svgavatars.css - styles for svgavatars.min.js - jQuery script for creating vector avatars
+ * @version: 1.3 (20.01.2014)
+ * @requires jQuery v1.8.2 or later
+ * @URL http://svgavatars.com
+ * @author DeeThemes (http://codecanyon.net/user/DeeThemes)
+*******************************************************************************************/
+
+#svgAvatars {
+	margin: 0 auto;
+}
+#svga-container,
+#svga-container *,
+#svga-container *:before,
+#svga-container *:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+#svga-container ul {
+	-webkit-margin-before: 0em;  
+	-webkit-margin-after: 0em;  
+	-webkit-margin-start: 0px;  
+	-webkit-margin-end: 0px;  
+	-webkit-padding-start: 0px;  
+}
+#svga-container {
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 20px;
+	font-size: 14px;
+	font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 300;
+	padding-bottom: 30px;
+	width: 100%;
+	min-width:240px;
+	height: auto;
+	border-top: 3px solid;
+	border-bottom: 3px solid;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+#svga-container:before,
+#svga-container:after {
+	content: " ";
+	display: table;
+}
+#svga-container:after {
+	clear: both;
+}
+.svga-row {
+	margin-left: -15px;
+	margin-right: -15px;
+}
+.svga-row:before,
+.svga-row:after {
+	content: " ";
+	display: table;
+}
+.svga-row:after {
+	clear: both;
+}
+.svga-col-left, .svga-col-right, .svga-col-groups, .svga-col-shapes {
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+	float: left;
+	height: auto;
+}
+.svga-col-full {
+	width: 100%;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.svga-col-left, .svga-col-right {
+	width: 100%;
+}
+#svga-container h1,
+#svga-container h2,
+#svga-container h3,
+#svga-container h4,
+#svga-container h5,
+#svga-container h6 {
+	font-family: inherit;
+	font-weight: 300;
+	line-height: 1.1;
+	color: inherit;
+}
+#svga-container h1,
+#svga-container h2,
+#svga-container h3 {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	line-height: 1.1;
+}
+#svga-container h4,
+#svga-container h5,
+#svga-container h6 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#svga-container h1 {
+	font-size: 36px;
+}
+#svga-container h2 {
+	font-size: 30px;
+}
+#svga-container h3 {
+	font-size: 24px;
+}
+#svga-container h4 {
+	font-size: 18px;
+}
+#svga-container h5 {
+	font-size: 14px;
+}
+#svga-container h6 {
+	font-size: 12px;
+}
+#svga-container p {
+	font-family: inherit;
+	color: inherit;
+	margin: 20px 0 10px;
+}
+#svga-container ul,
+#svga-container ul li,
+#svga-container ul li ul,
+#svga-container ul li ul li {
+	font-family: inherit;
+	color: inherit;
+	font-size: inherit;
+	margin: 0;
+}
+@-ms-viewport {
+	width: device-width;
+}
+.svga-active {
+	font-weight: 400;
+}
+
+/******************* HTML5 Canvas ********************/
+#svga-canvas-wrap {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	z-index: -1;
+}
+#svga-canvas {
+	visibility: hidden!important;
+	overflow: hidden!important;
+	z-index: -1;
+}
+
+/***************** Global controls *******************/
+.svga-row.row-glob-controls {
+	border-top: 1px solid;
+}
+#svga-glob-controls {
+	width: 100%;
+	white-space: nowrap;
+	font-size: 0;
+	line-height: 0;
+	overflow-y: hidden;
+}
+.svga-glob-controls {
+	display: inline-block;
+	width: 13.75%;
+	padding-bottom: 13.75%;
+	border-right: 1px solid;
+	white-space: normal;
+	overflow: hidden;
+	cursor: pointer;
+	position: relative;
+}
+.svga-glob-controls:last-child {
+	border: none;
+}
+
+/***************** Color change *****************/
+.svga-row.row-colors {
+	border-top: 1px solid;
+	margin-top: -1px;
+}
+#svga-colors-wrap {
+	overflow: hidden;
+	position: relative;
+}
+#svga-colors {
+	width: 100%;
+	white-space: nowrap;
+	font-size: 0;
+	line-height: 0;
+	overflow-y: hidden;
+}
+.svga-colors-set > div {
+	display: inline-block;
+	position: relative;
+	width: 12%;
+	padding-bottom: 12%;
+	margin: 3% 1%;
+	white-space: normal;
+	border: 2px solid;
+	-webkit-box-sizing: content-box!important;
+	-moz-box-sizing: content-box!important;
+	box-sizing: content-box!important;
+	cursor: pointer;
+}
+#svga-custom-color input {
+	display: none;
+}
+#svga-custom-color {
+	width: 15%;
+	padding-bottom: 15%;
+	float: right;
+	position: relative;
+	-webkit-box-sizing: content-box!important;
+	-moz-box-sizing: content-box!important;
+	box-sizing: content-box!important;
+}
+.svga-col-left .sp-replacer {
+	position: absolute;
+	border: none;
+	width: 80%;
+	top: 14%;
+	left: 10%;
+}
+.svga-col-left .sp-preview {
+	width: 100%;
+	padding-bottom: 100%;
+	border: none !important;
+	width: 17px;
+    height: 12px;
+}
+.svga-col-left .sp-preview,
+.svga-col-left .sp-preview-inner {
+	-webkit-border-radius: 50%!important;
+	-moz-border-radius: 50%!important;
+	border-radius: 50%!important;
+}
+.svga-col-left .sp-preview {
+	background-image: none!important;
+}
+
+/****************** SVG canvas ********************/
+#svga-svgmain {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	width: 90%;
+	padding-bottom: 90%;
+	margin: 5% 5% 3%;
+}
+.svga-svg{
+	display: block;
+	overflow: hidden;
+	position: absolute!important;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/******************* Controls ********************/
+.svga-row.row-controls {
+	border-top: 1px solid;
+}
+#svga-controls {
+	width: 100%;
+	white-space: nowrap;
+	font-size: 0;
+	line-height: 0;
+	overflow-y: hidden;
+	text-align: center;
+}
+.svga-controls {
+	display: inline-block;
+	width: 13.75%;
+	padding-bottom: 12.75%;
+	margin-right: -1px;
+	border-left: 1px solid;
+	border-right: 1px solid;
+	white-space: normal;
+	cursor: pointer;
+	position: relative;
+}
+.svga-control-icon{
+  display: block;
+  overflow: hidden;
+  position: absolute!important;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+}
+
+/*************** Elements (parts) ****************/
+.svga-row.row-elements {
+	border-top: 1px solid;
+	padding-top: 5px;
+	margin-top: -1px;
+}
+#svga-elements {
+	width: 100%;
+	white-space: nowrap;
+	font-size: 0;
+	line-height: 0;
+	overflow-y: hidden;
+	padding-bottom: 20px;
+}
+.svga-elements {
+	display: inline-block;
+	width: 20%;
+	padding-bottom: 19%;
+	margin: 0 1px 3px 0;
+	border: 2px solid;
+	white-space: normal;
+	overflow: hidden;
+	cursor: pointer;
+	position: relative;
+}
+
+/***************** Body zones *******************/
+.svga-row.row-bodyzones {
+	margin-top: 5px;
+}
+#svga-bodyzones {
+	width: 100%;
+	display: table;
+	table-layout: fixed;
+}
+.svga-bodyzones {
+	display: table-cell;    
+    font-weight: bold;	
+	font-size: 14px;
+	height: 50px;
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+	text-transform: uppercase;
+}
+
+/******************** Blocks ********************/
+#svga-blocks {
+	width: 100%; 
+	white-space: nowrap;
+	font-size: 0;
+	line-height: 0;
+	margin-top: -10px;
+}
+
+.header {
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 90%;
+}
+
+.header-text {	
+    color: #fff;
+    display: initial;
+    font-size: 44px;
+    font-family: RobotoSlabLight;
+    font-weight: lighter;    
+    line-height: 40px;
+    padding-left: 90px; 
+    position: relative;   
+    top: -60px;
+    vertical-align: top;    
+}
+
+.subheader-text {
+	color: #b3b3b3;
+    position: relative;
+    left: 0;
+    font-family: RobotoSlab;
+    font-size: 17.8px;
+    display: initial;
+    position: absolute;
+    left: 110px;
+    top: 92px;    
+}
+
+.row-controls {
+   margin-left: 10%;
+}
+
+/*************** Footer menu ****************/
+#svga-footermenu {
+	margin-top: 30px;
+	position: relative;
+	margin-bottom: 0;
+	width: 100%;
+	display: table;
+	table-layout: fixed;
+}
+#svga-footermenu ul {
+	display: table-row;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#svga-footermenu ul li {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	position: relative;
+	padding: 0;
+	cursor: pointer;
+	font-size: 14px;
+	height: 60px;
+}
+li#svga-downloadavatar {
+	border-right: none!important;
+}
+#svga-footermenu ul li ul {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	bottom: 60px;
+	right: 0px;
+	width: 150px!important;
+	display: none;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 1000;
+	-webkit-transition: opacity 0.5s;
+	-moz-transition: opacity 0.5s;
+	-ms-transition: opacity 0.5s;
+	-o-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+#svga-footermenu ul li ul li { 
+	display: block;
+	width: 100%;
+	line-height: 48px;
+	height: 50px;
+	margin-top: -1px;
+	z-index: 1000;
+	text-indent: 0px;
+	font-size: 14px;
+}
+#svga-footermenu ul li#svga-downloadavatar:hover ul {
+	display: block;
+	opacity: 1;
+	visibility: visible;
+}
+#svga-randomavatar > div,
+#svga-resetavatar > div,
+#svga-saveavatar > div,
+#svga-shareavatar > div,
+#svga-gravataravatar > div,
+#svga-downloadavatar > div {
+	display: inline;
+	position: relative;
+	overflow: auto;
+}
+.svga-menu-icon {
+	display: inline;
+	width: 21px;
+	height: 21px;
+}
+
+/********************* Credit **********************/
+p.svga-credit {
+	font-family: inherit;
+	font-size: 10px;
+}
+.svga-credit a {
+	text-decoration: none;
+}
+.svga-no-touch .svga-credit a:hover,
+.svga-credit a:focus {
+	text-decoration: underline;
+}
+
+/***************** Hidden on mobile *****************/
+.svga-mobilehidden {
+	display: none!important;
+}
+
+/******************** All modals ********************/
+#svga-start-overlay {
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	opacity:1;
+	z-index:999;
+}
+#svga-work-overlay {
+	display: none;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	background-color: #000;
+	opacity:0.7;
+	z-index:999;
+}
+#svga-loader {
+	display: inline-block;
+	height: 50px;
+	width: 240px;
+	overflow: hidden;
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	font: inherit;
+	color: inherit;
+	text-align: center;
+	z-index:1000;
+}
+#svga-gender {
+	display: block;
+	width: 70%;
+	height: 270px;
+	min-width: 260px;
+	overflow: hidden;
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	z-index:1000;
+	text-align: center;
+}
+#svga-gender h1,
+#svga-gender h2,
+#svga-gender h3 {
+	padding: 0;
+	margin-bottom: 40px;
+	color: inherit;
+}
+#svga-gender p {
+	font-size: 14px;
+	line-height: 1;
+	color: inherit;
+}
+#svga-starticons-wrap {
+	display: inline-block;
+	margin: 20px 0px 20px 0;
+	width: 100%;
+}
+.svga-starticons-inner {
+	margin: 0 auto;
+	width: 100%;    
+}
+#svga-start-boys,
+#svga-start-girls {
+    width: 20%;
+    height: 40px;
+    float: left;
+    margin: 0 0px 0 22%;
+	cursor: pointer;
+}
+
+.avatars-dialog {
+	background-color: #000;
+	display: none;
+	height: auto;
+	overflow: hidden;
+	position: absolute;	
+	
+	right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+
+	padding:20px 30px 40px;
+	position: absolute;
+	width: 70%;
+	text-align: center;
+	top: 300px;
+	z-index: 1000;
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	-o-user-select: text;
+	user-select: text;    
+}
+
+.avatars-dialog-btns {
+	width: 100%;
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.hash-avatars-dialog-btns {
+	display: inline-block;	
+	left: -30px;
+    margin: 0;        
+    position: relative;
+    width: 100%;
+}
+
+.avatars-dialog-btn {
+	display: block;
+    width: 40%;
+	height: 44px;
+	border: 1px solid;
+	line-height: 42px;
+	float: left;
+	cursor: pointer;
+	text-align: center;
+}
+
+.avatars-dialog-btn.pkey {
+	margin-left: 10%;
+    width: 30%;
+}
+
+.avatars-dialog-btn.narrow {
+	width: 35%;
+    margin-left: 10%;
+}
+
+#waiting-dialog {
+	background-color: #fff;
+    bottom: 30%;
+    left: 0;
+    right: 0;
+    position: fixed;
+    left: 30%;
+    height: 100px;
+    width: 550px;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    float: left;
+    height: 40px;
+    margin-left: 15px;
+    margin-top: 12px;
+    margin-right: 30px;
+}
+
+.balance-spinner {
+	border: 4px solid #f3f3f3;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 18px;       
+    margin-top: -20px;
+    margin-left: 90px;
+    height: 18px;        
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.waiting-message {
+	font-size: 18px;
+    margin-top: 18px;
+}
+
+.pkey-input {
+	width: 100%;
+	height: 30px;
+	margin-bottom: 20px;
+}
+
+#hash-dialog-ok {
+	margin-top: 20px;
+    width: 140px;    
+    margin-left: 40%;
+}
+
+#svga-message {
+	display: none;
+	height: auto;
+	width: 90%;
+	overflow: hidden;
+	margin: auto;
+	position: absolute;
+	bottom: 15%; left: 0; right: 0;
+	padding:20px 30px 40px;
+	z-index:1000;
+}
+#svga-ios,
+#svga-share-block {
+	display: none;
+	height: auto;
+	width: 90%;
+	overflow: hidden;
+	margin: auto;
+	position: absolute;
+	bottom: 10%; top: auto; left: 0; right: 0;
+	padding:20px 30px 30px;
+	z-index:1000;
+}
+#svga-share-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+#svga-share-block {
+	padding-top: 30px;
+	text-align:center;
+}
+#svga-share-block ul {
+	width: auto;
+	margin: 0 auto;
+	padding: 0;
+}
+#svga-share-block li {
+  display: inline-block;
+  zoom: 1;
+  margin: 10px 5px 10px!important;
+}
+#svga-share-block li a{
+	color: white;
+	text-decoration: none;
+}
+.svga-share-icons {
+	display: inline;
+	width: 32px;
+	height: 32px;
+}
+.svga-share-icons:hover .svga-share-icons-path {
+	opacity: 0.6;
+}
+.svga-close,
+#svga-tryagain {
+	width: 100%;
+	margin-top: 10px;
+	display: inline-block;
+	height: 44px;
+	border: 1px solid;
+	line-height: 42px;
+	cursor: pointer;
+	text-align: center;
+}
+.svga-nosvg {
+	margin: 100px auto 120px!important;
+	z-index: 1000;
+	text-align: center;
+	line-height: 2!important;
+	font-weight: 600!important;
+}
+
+/******************* All transitions ****************/
+.svga-colors-set > div,
+.svga-col-left .sp-replacer,
+.svga-blocks,
+.svga-bodyzones,
+.svga-elements,
+.svga-glob-controls,
+.svga-controls,
+.avatars-dialog,
+.avatars-dialog-btn,
+#svga-footermenu ul li,
+#svga-dialog-ok,
+#svga-dialog-cancel,
+#svga-gravatar-ok,
+#svga-gravatar-cancel,
+.svga-close,
+#svga-tryagain,
+.svga-icon-boy,
+.svga-icon-girl,
+.svga-share-icons-path {
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	-ms-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+}
+
+/***************** CUSTOM SCROLLBAR ****************/
+.scroll-wrapper {
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: relative;
+}
+.scroll-wrapper > .scroll-content {
+	border: none !important;
+	-webkit-box-sizing: content-box!important;
+	-moz-box-sizing: content-box!important;
+	box-sizing: content-box !important;
+	height: auto;
+	left: 0;
+	margin: 0;
+	max-height: none !important;
+	max-width: none !important;
+	overflow: scroll !important;
+	padding: 0;
+	position: relative !important;
+	top: 0;
+	width: auto !important;
+}
+.scroll-wrapper > .scroll-content::-webkit-scrollbar {
+	height: 0;
+	width: 0;
+}
+.scroll-element .scroll-bar,
+.scroll-element .scroll-arrow {
+	cursor: pointer;
+}
+/* Simple outer scroll */
+.scroll-simple_outer > .scroll-content.scroll-scrolly_show { left: -0px; margin-left: 0px; }
+.scroll-simple_outer > .scroll-content.scroll-scrollx_show { top:  -2px; margin-top: 2px; }
+.scroll-simple_outer > .scroll-element,
+.scroll-simple_outer > .scroll-element div {
+	border: none;
+	display: block;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	z-index: 10;
+}
+.scroll-simple_outer > .scroll-element div {
+	height: 100%;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+.scroll-simple_outer > .scroll-element.scroll-x {
+	bottom: 0;
+	height: 2px;
+	left: 0;
+	min-width: 100%;
+	width: 100%;
+}
+.scroll-simple_outer > .scroll-element.scroll-y {
+	height: 100%;
+	min-height: 100%;
+	right: 0;
+	top: 0;
+	width: 0px;
+}
+.scroll-simple_outer > .scroll-element .scroll-bar {
+	background-color: #9999fc;
+}
+.scroll-simple_outer > .scroll-element.scroll-x .scroll-bar { top: 0px; height: 2px;}
+.scroll-simple_outer > .scroll-element.scroll-y .scroll-bar { left: 0px; width: 0px;}
+/* proceed offse if another scroll is visible */
+.scroll-simple_outer > .scroll-element.scroll-x.scroll-scrolly_show .scroll-element_size { left: -12px; }
+.scroll-simple_outer > .scroll-element.scroll-y.scroll-scrollx_show .scroll-element_size { top: -12px; }
+.scroll-simple_outer > .scroll-element.scroll-x.scroll-scrolly_show .scroll-element_inner { left: -12px; }
+.scroll-simple_outer > .scroll-element.scroll-y.scroll-scrollx_show .scroll-element_inner { top: -12px; }
+
+
+.svga-win8tablet .scroll-simple_outer > .scroll-content.scroll-scrollx_show { top:  -12px; margin-top: 12px; }
+.svga-win8tablet .scroll-simple_outer > .scroll-element.scroll-x { height: 12px; }
+.svga-win8tablet .scroll-simple_outer > .scroll-element.scroll-x .scroll-bar { top: 0px; height: 12px;}
+
+.last-avatar-image {
+		border-radius: 70px;
+		height: 70px;
+	    margin-left: 20px;
+	    margin-right: 20px;
+	    margin-top: 30px;
+	    margin-bottom: 15px;
+}
+.recent-faces {		
+	color: #000;
+	font-size: 27px;
+	padding-top: 20px;
+	text-align: center;
+}
+
+#last-avatars {
+	min-height: 150px;
+}
+
+.last-avatar-image {
+	height: 100px;
+}
+
+.last-avatar {
+    color: #CBCFC7;
+    float: right;
+    padding-top: 55px;
+    padding-bottom: 30px;
+    width: 200px;
+    margin-right: 100px;
+    font-size: 14px;
+}
+
+.svga-col-shapes {
+	display: table;
+}
+
+.svga-col-last-avatars {
+	background-color: #E5E5E5;
+    display: table;
+	float: left;
+	height: 100%;
+	margin-bottom: 40px;
+	margin-top: 20px;    	
+	padding-top: 20px;				
+	position: relative;    	
+	width: 100%;
+}	
+
+.svga-last {
+    height: 15px !important;
+}
+
+.svga-col-left {
+	display: table;
+}
+.svga-vert-order-glob-controls {
+	display: table-row-group;
+	width: 100%;
+}
+.svga-vert-order-colors {
+	display: inherit;
+	position: relative;
+	top: 0.5px;
+}
+
+#hash-dialog {
+	background-color: #F1F1F1;
+    bottom: 30%;
+    color: #757575;
+    position: fixed;
+    height: 150px;
+    overflow-x: scroll;
+}
+
+#pkey-dialog {
+    background-color: #F1F1F1;
+    color: #757575;
+    bottom: 30%;
+    color: #757575;
+    position: fixed;
+    height: 310px;    
+    text-align: left;
+    width: 70%;
+}
+
+.your-balance {
+	display: inline;
+	margin-right: 15px;
+}
+
+.metamask-info {
+	font-size: 12px;
+    float: right;
+    margin-right: 15px;
+    margin-top: 20px;
+}
+
+.green {
+	color: #5CB85C;
+}
+
+.red {
+	color: #E45C5C;
+}
+
+.control-button {
+	background-color: #D3D3D3;
+	border: none;
+	font-family: 'Roboto';
+	font-size: 14.6px;
+	font-weight: 600;
+	display: block;
+	height: 30px;
+	line-height: 17.5px;
+	margin-bottom: 10px;    	    
+	width: 100%;
+}
+
+.slack-badge {
+	position: relative;
+}
+
+#svga-shareavatar {
+	border-radius: 0;
+    border: none;
+    background-color: #0071BB;
+    color: #F1F1F1;	    
+    font-family: -webkit-body;
+    font-size: 21px;
+    height: 50px;	 
+    margin-left: 20%;
+    margin-top: 60px;
+    line-height: 25.2px;	    	   
+    width: 60%;
+}
+
+#svga-shareavatar:disabled {
+	opacity: .65;
+}
+
+.blue {
+	color: #0071BB;
+}
+
+.contract-code {		    
+	height: 500px;    	
+	margin-top: 30px;
+	overflow-x: scroll;
+}
+
+.share-help {
+	color: #0071bb;
+	display: block;
+	font-size: 14.4px;
+	line-height: 17.3px;
+	margin-top: 30px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.specification {
+	font-size: 24px;
+	font-family: RobotoSlabRegular;
+	line-height: 28.8px;		
+	padding-top: 60px;
+	text-align: center;
+}
+
+.specification-desc {
+	font-size: 20px;
+	font-family: RobotoSlabRegular;
+	line-height: 26px;		
+	padding-top: 20px;
+	text-align: center;	
+}
+
+.bottom-desc {
+	text-align: center;
+}
+
+.social-bottom {
+	color: #1074B9;
+    font-size: 20px !important;
+    margin-top: 30px;	    
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 40px;
+}
+
+.bottom-hr {
+	border-bottom: solid 1px #e5e5e5;
+    margin: 40px 10% 20px 10%;
+	width: 80%;
+}
+
+.dialog-hr {
+	border-bottom: solid 1px #e5e5e5;
+    margin: 10px 0% 20px 0%;
+	width: 100%;
+}
+
+.bottom-logo {
+	display: block;
+	height: 30px;
+	margin: 30px auto 30px auto;
+}
+
+#svga-dialog {		
+    background-color: #F1F1F1;
+    bottom: 30%;
+    color: #757575;
+    position: fixed;
+    height: 220px;	    
+    width: 70%;
+}
+
+.svga-vert-order-blocks {
+	display: table-header-group;	
+	width: 100%;
+}
+
+
+
+.svga-blocks {		
+    color: #4d4d4d;
+    display: table-cell;
+    font-weight: bold;
+    min-width: 0;
+    width: 19.999999999%;
+    padding: 0;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0 10px;
+    min-width: 22%;
+    height: 39px;
+    white-space: normal;
+    font-size: 12px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    line-height: 50px;
+}
+
+.svga-blocks-container {
+	display: table;
+	margin-top: 10px;
+	table-layout: fixed;
+}
+
+#hash-dialog {
+	text-align: left;
+	width: 68%;
+}
+
+/******************* Media queries *******************/
+@media (min-width: 481px) {
+
+	.avatars-dialog {
+		width: 40%;
+	}
+
+	.header {
+		left: 10%;
+	}
+
+	.header-text {	
+		padding-left: 30px;
+		position: inherit;
+		top: inherit;
+	}
+
+	.subheader-text {
+		top: 80px;
+		left: 130px;
+	}	
+
+	.slack-badge {
+		float: right;
+    	top: 48px;    
+	}
+
+	.svga-blocks-container {
+		border-right: 1px solid #b3b3b3;
+	}
+
+	.svga-blocks {
+		display: block;
+		font-size: 14px;
+		padding: 0 30px;
+	}
+
+	#pkey-dialog {
+		height: 280px;
+	}
+
+	#hash-dialog {
+		width: 68%;
+	}
+
+	#svga-container {
+		padding-left: 0px;
+		padding-right: 0px;
+		min-width: 481px;
+		min-height: 400px;
+	}
+	.svga-row {
+		margin: 0;
+	}
+	
+	.svga-vert-order-svgcanvas {
+		display: table-header-group;
+	}
+	.svga-row.row-glob-controls {
+		border: none;
+	}
+	.svga-vert-order-main {
+		display: table-header-group;
+		width: 100%;
+	}
+	.svga-vert-order-controls {
+		display: table-row-group;
+		width: 100%;
+	}
+	.svga-android-hack {
+		display: inline-table;
+		width: 100%;
+	}
+	
+	.svga-vert-order-bodyzones {
+		display: table-caption;
+	}
+	.svga-vert-order-elements {
+		display: block;
+		float: left;
+		width: 70%;
+	}
+	.scroll-simple_outer > .scroll-content.scroll-scrollx_show { top: 0; margin-top: 0; }
+	.scroll-simple_outer > .scroll-element.scroll-x {
+		height: 0px!important;
+	}
+	#svga-glob-controls {
+		max-width: 100%;
+	}
+	.svga-glob-controls,
+	.svga-glob-controls:last-child {
+		display: block;
+		width: 12.5%;
+		padding-bottom: 12%;
+		margin-bottom: 10px;
+		border: 1px solid;
+		float: left;
+	}
+	.svga-row.row-colors {
+		border: none;
+		margin-top: 0;
+		margin-bottom: 15px;
+		position: relative;
+		width: 130px;
+	}
+	#svga-colors-wrap {
+		width: 100%;
+		float: left;
+	}
+	.svga-colors-set > div {
+		display: block;
+		width: 25.285714%;
+		padding-bottom: 22.2%;
+		margin: 0;
+		float: left;
+		border: 2px solid;
+		-webkit-box-sizing: border-box!important;
+		-moz-box-sizing: border-box!important;
+		box-sizing: border-box!important;
+	}
+	#svga-custom-color {
+		width: 25.285714%;
+		position: absolute;
+		z-index: 100;
+		bottom: -23px;
+    	right: 31px;
+		-webkit-box-sizing: border-box!important;
+		-moz-box-sizing: border-box!important;
+		box-sizing: border-box!important;
+	}
+	.svga-col-left .sp-replacer {
+		width: 100%;
+		top: 0%;
+		left: 0%;
+	}
+	.svga-row.row-svgcanvas {
+		border: none;
+		margin: 0;
+	}
+	#svga-svgmain {
+	  width: 100%;
+	  padding-bottom: 100%;
+	  margin: 10px 0;
+	}
+	
+	.svga-blocks:first-child {
+		border-left: none;
+	}
+
+	.svga-blocks-container {
+		border-right: 1px solid #b3b3b3;
+		display: table;
+		margin-top: 10px;
+		table-layout: inherit;
+	}
+	
+	.svga-row.row-bodyzones {
+		margin-top: 0;
+		border: none;
+	}
+	.svga-row.row-elements {
+		border: none;
+		padding-top:0;
+		margin-top: 2px;
+	}
+	.svga-elements {
+		display: block;
+		width: 20%;
+		padding-bottom: 19%;
+		margin: 0;
+		border: 2px solid;
+		float: left;
+	}
+	.svga-row.row-controls {
+		border: none;
+	    margin-top: -20px;
+    	margin-bottom: 20px;
+	}
+	.svga-controls {
+		display: inline-block;
+		width: 9.09090909090908%;
+		padding-bottom: 8.6%;
+		margin: 0;
+		float: left;
+		border: 1px solid;
+	}
+	#svga-footermenu {
+		margin-top: 10px;
+		margin-bottom: 15px; 
+	}
+	#svga-footermenu ul li {
+		height: 50px;
+		line-height: 48px;
+	}
+	#svga-footermenu ul li ul {
+		bottom: 50px;
+	}
+	#svga-randomavatar > div,
+	#svga-resetavatar > div,
+	#svga-saveavatar > div,
+	#svga-shareavatar > div,
+	#svga-gravataravatar > div,
+	#svga-downloadavatar > div {
+		display: none;
+	}
+	p.svga-credit {
+		margin: 0 0 0 15px !important;
+		position: relative;
+		bottom: 5px;
+		text-align: left;
+	}
+	.svga-mobilehidden {
+		display: block!important;
+	}
+	
+	#svga-gravatar {
+		width: 60%;
+		bottom: 20%; left: 0; right: 0;
+	}
+	#svga-message,
+	#svga-gravatar-message {
+		width: 50%;
+		bottom: 30%; left: 0; right: 0;
+	}
+	#svga-ios,
+	#svga-share-block {
+		width: 50%;
+		top: auto; bottom: 5%; left: 0; right: 0;
+	}
+	.svga-opera .svga-glob-controls,
+	.svga-opera .svga-colors-set > div:last-child,
+	.svga-opera .svga-elements:last-child,
+	.svga-opera .svga-controls {
+		margin-bottom: 17px;
+	}
+	.svga-input {
+		width: 46%;
+		font-size:13px;
+		border: 1px solid;
+		text-decoration: none;
+		height: 40px;
+		padding: 0 0 0 12px;
+	}	
+}
+
+@media (max-width:480px) {
+	#svga-container {
+		font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	}
+}
+@media (min-width: 481px) {
+	#svga-container {
+		font-family: 'Roboto Condensed', 'Helvetica Condensed', 'Arial Narrow', sans-serif;
+	}
+}
+@media (min-width: 769px) {
+	#svga-container {
+		font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+}
+
+
+.arrow_box {
+	position: relative;
+	background: #000;
+	border: 4px solid #000;
+}
+.arrow_box:after, .arrow_box:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-top-color: #000;
+	border-width: 30px;
+	margin-left: -30px;
+}
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-top-color: #000;
+	border-width: 36px;
+	margin-left: -36px;
+}
+
+
+/******************* Color schemes *******************/
+
+/* LIGHT scheme */
+#svga-container.svga-light,
+.svga-light .svga-glob-controls,
+.svga-light .svga-col-left .sp-replacer,
+.svga-light #svga-footermenu ul li ul li,
+.svga-light #svga-start-overlay,
+.svga-light #svga-gender,
+.svga-light #svga-dialog,
+.svga-light .avatars-dialog,
+.svga-light #svga-gravatar,
+.svga-light #svga-message,
+.svga-light #svga-gravatar-message,
+.svga-light #svga-ios,
+.svga-light #svga-share-block {
+	background-color: #fafafa;
+}
+.svga-light .svga-colors-set > div,
+.svga-light .svga-elements {
+	border-color: #fafafa;
+}
+
+.indicator {
+    background-color: #0071bb;
+    display: none;
+    height: 6px;
+    position: absolute;
+    width: 70px;
+    top: 48px;
+    left: 12px;
+    -webkit-transition: left linear 150ms;
+    transition: left linear 150ms;
+}
+
+.svga-row.main {
+	background-color: #ffffff;
+    padding-top: 20px;
+    position: relative;
+}
+
+#svga-container.svga-light,
+#svga-container.svga-light .svga-nosvg,
+.svga-light .svga-input {
+	color: #777;
+}
+
+.svga-light .svga-control-icon-path,
+.svga-light .svga-menu-icon-path,
+.svga-light .svga-icon-boy,
+.svga-light .svga-icon-girl {
+	fill: #aaa;
+}
+.svga-light .svga-credit a {
+	color: #999;
+}
+
+.svga-no-touch.svga-light .avatars-dialog-btn:hover,
+.svga-no-touch.svga-light #svga-dialog-cancel:hover,
+.svga-no-touch.svga-light #svga-dialog-ok:hover,
+.svga-no-touch.svga-light #svga-gravatar-cancel:hover,
+.svga-no-touch.svga-light #svga-gravatar-ok:hover,
+.svga-no-touch.svga-light .svga-close:hover,
+.svga-no-touch.svga-light #svga-tryagain:hover {
+	color: #fff;
+}
+
+#svga-container {
+	background-image: url('/svgavatars/images/shanghai_bg_x2.png');
+}
+
+.svga-dark .svga-credit a {
+	color: #8da2a7;
+}
+
+/* FEMALE colors */
+.svga-no-touch.svga-girls .avatars-dialog-btn:hover,
+.svga-no-touch.svga-girls #svga-dialog-cancel:hover,
+.svga-no-touch.svga-girls #svga-dialog-ok:hover,
+.svga-no-touch.svga-girls #svga-gravatar-cancel:hover,
+.svga-no-touch.svga-girls #svga-gravatar-ok:hover,
+.svga-no-touch.svga-girls .svga-close:hover,
+.svga-no-touch.svga-girls #svga-tryagain:hover {
+	border-color: #e74c3c;
+}
+.svga-no-touch.svga-girls .svga-bodyzones:hover,
+.svga-girls .svga-bodyzones.svga-active,
+.svga-no-touch.svga-girls .svga-blocks:hover,
+.svga-girls .svga-blocks.svga-active {
+	color: #e74c3c;
+}
+
+.svga-no-touch.svga-girls .avatars-dialog-btn:hover,
+.svga-no-touch.svga-girls #svga-dialog-cancel:hover,
+.svga-no-touch.svga-girls #svga-dialog-ok:hover,
+.svga-no-touch.svga-girls #svga-gravatar-cancel:hover,
+.svga-no-touch.svga-girls #svga-gravatar-ok:hover,
+.svga-no-touch.svga-girls .svga-close:hover,
+.svga-no-touch.svga-girls #svga-tryagain:hover,
+.svga-girls .scroll-simple_outer > .scroll-element .scroll-bar {
+	background-color: #e74c3c;
+}
+#svga-start-girls:hover .svga-icon-girl {
+	fill: #e74c3c;
+}
+.svga-no-touch.svga-girls .svga-elements:hover,
+.svga-no-touch.svga-girls .svga-colors-set > div:hover,
+.svga-girls .svga-colors-set > div.svga-active,
+.svga-girls .svga-elements.svga-active-element {
+	border-color: #e74c3c;
+}
+
+/* MALE colors */
+.svga-no-touch.svga-boys .avatars-dialog-btn:hover,
+.svga-no-touch.svga-boys #svga-dialog-cancel:hover,
+.svga-no-touch.svga-boys #svga-dialog-ok:hover,
+.svga-no-touch.svga-boys #svga-gravatar-cancel:hover,
+.svga-no-touch.svga-boys #svga-gravatar-ok:hover,
+.svga-no-touch.svga-boys .svga-close:hover,
+.svga-no-touch.svga-boys #svga-tryagain:hover {
+	border-color: #3498db;
+}
+.svga-no-touch.svga-boys .svga-bodyzones:hover,
+.svga-boys .svga-bodyzones.svga-active,
+.svga-no-touch.svga-boys .svga-blocks:hover,
+.svga-boys .svga-blocks.svga-active {
+	color: #3498db;
+}
+
+.svga-no-touch.svga-boys .avatars-dialog-btn:hover,
+.svga-no-touch.svga-boys #svga-dialog-cancel:hover,
+.svga-no-touch.svga-boys #svga-dialog-ok:hover,
+.svga-no-touch.svga-boys #svga-gravatar-cancel:hover,
+.svga-no-touch.svga-boys #svga-gravatar-ok:hover,
+.svga-no-touch.svga-boys .svga-close:hover,
+.svga-no-touch.svga-boys #svga-tryagain:hover,
+.svga-boys .scroll-simple_outer > .scroll-element .scroll-bar {
+	background-color: #3498db;
+}
+#svga-start-boys:hover .svga-icon-boy {
+	fill: #3498db;
+}
+.svga-no-touch.svga-boys .svga-elements:hover,
+.svga-no-touch.svga-boys .svga-colors-set > div:hover,
+.svga-boys .svga-colors-set > div.svga-active,
+.svga-boys .svga-elements.svga-active-element {
+	border-color: #3498db;
+}
+
+/* COMMON colors */
+.svga-error h1,
+.svga-error h2,
+.svga-error h3,
+.svga-error h4,
+.svga-error h5,
+.svga-error h6 {
+	color: red!important;
+}

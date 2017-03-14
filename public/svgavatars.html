@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>face.crypto.camp</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta charset="utf-8">
+	<meta name="author" content="DeeThemes">
+	<meta itemprop="name" content="svgAvatars">
+	<meta property="og:image" content="https://i.imgur.com/xJ51qcf.png">
+    <meta property="og:image:height" content="300">
+    <meta property="og:image:width" content="300">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" itemprop="description" content="Your avatar in the crypto world">
+
+	<link href="svgavatars/css/normalize.css" rel="stylesheet">
+	<link href="svgavatars/css/spectrum.css" rel="stylesheet">
+	<link href="svgavatars/css/svgavatars.css" rel="stylesheet">
+	<link href="svgavatars/css/bootstrap-3.3.6.css" rel="stylesheet">	
+	<link href="svgavatars/css/prism-okaidia.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">	
+	
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+	
+	<script src="svgavatars/js/jquery-1.10.2.min.js"></script>
+	<script src="svgavatars/js/svg.js"></script>
+
+	<script src='svgavatars/js/spectrum.js'></script>
+	<script src="svgavatars/js/jquery.scrollbar.js"></script>
+
+	<script src="svgavatars/js/canvg/rgbcolor.js"></script> 
+	<script src="svgavatars/js/canvg/StackBlur.js"></script>
+	<script src="svgavatars/js/canvg/canvg.js"></script>
+
+	<script src="svgavatars/js/bignumber-2.4.0.js"></script>
+	<script src="svgavatars/js/underscore-1.8.3.js"></script>
+
+	<script src="svgavatars/js/ethereum-utils.js"></script>
+	<script src="svgavatars/js/EthereumAddress.min.js"></script>
+	<script src="svgavatars/js/Ethereum.min.js"></script>
+
+	<script src="svgavatars/js/svgavatars.en.js"></script>
+	<script src="svgavatars/js/svgavatars.core.min.js"></script>
+
+</head>
+<body>
+	<div id="svgAvatars">
+	<div class="arrow_box">
+			<div id="svga-container" class="svga-no-touch">
+				<div class="row header col-lg-10">
+					<img src="/svgavatars/images/x1_cryptoface_logo.png" />
+					<div class="header-text">CryptoFace</div>
+					<div class="subheader-text">Open development: Blockchain Avatars</div>
+					<a class="slack-badge" href="http://ether.camp">
+				        <img src="https://camo.githubusercontent.com/adcdc51604de3ffef2906f980377af42412743d5/687474703a2f2f6861726d6f6e792d736c61636b2d65746865722d63616d702e6865726f6b756170702e636f6d2f62616467652e737667" alt="Slack Status" data-canonical-src="http://harmony-slack-ether-camp.herokuapp.com/badge.svg" style="max-width:100%;">
+				    </a>
+				</div>
+				<div id="svga-canvas-wrap">
+					<canvas id="svga-canvas"></canvas>
+				</div>
+				<div class="svga-row row main col-lg-10 col-lg-offset-1">
+					<div class="svga-col-left col-lg-3 col-sm-10">			
+						<div class="svga-vert-order-svgcanvas">
+							<div class="svga-row row-svgcanvas">
+								<div id="svga-svgmain"></div>
+							</div>
+							<div class="svga-row">
+			                   <div id="svga-footermenu">
+			                   		<button id="svga-randomavatar" class="control-button">Random</button>
+			                   		<button id="svga-resetavatar" class="control-button">Reset</button>
+			                   		<div id="svga-starticons-wrap">
+			                   			<div class="svga-starticons-inner">
+					                   		<div id="svga-start-boys"></div>
+					                   		<div id="svga-start-girls"></div>
+				                   		</div>
+			                   		</div>
+			                   </div>                
+			                </div>   
+						</div>
+					</div>
+					<div class="svga-col-groups col-lg-1">
+						<div class="svga-vert-order-blocks">
+							<div class="svga-row">
+								<div class="svga-blocks-container">
+									<div id="svga-blocks" class="scrollbar scroll-simple_outer">
+										<div id="svga-blocks-face" class="svga-blocks svga-active" data-blockname="face">face</div>
+										<div id="svga-blocks-eyes" class="svga-blocks" data-blockname="eyes">eyes</div>
+										<div id="svga-blocks-hair" class="svga-blocks" data-blockname="hair">hair</div>
+										<div id="svga-blocks-clothes" class="svga-blocks" data-blockname="clothes">clothes</div>
+										<div id="svga-blocks-backs" class="svga-blocks svga-last" data-blockname="backs">backs</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="svga-col-shapes col-lg-8">
+						<div class="svga-vert-order-controls">
+							<div class="svga-row row-controls">
+								<div id="svga-controls" class="scrollbar scroll-simple_outer"></div>
+							</div>
+						</div>
+						<div class="svga-vert-order-main">
+							<div class="svga-android-hack">
+								<div class="svga-vert-order-elements col-lg-8 col-lg-offset-1">
+									<div class="svga-row row-elements">
+										<div id="svga-elements" class="scrollbar scroll-simple_outer"></div>
+									</div>
+								</div>
+								<div class="svga-vert-order-colors col-lg-3">
+									<div class="svga-row row-colors">
+										<div id="svga-custom-color"><input type="text"></div>
+										<div id="svga-colors-wrap">
+											<div id="svga-colors" class="scrollbar scroll-simple_outer"></div>
+										</div>
+									</div>
+								</div>
+								<div class="svga-vert-order-bodyzones">
+									<div class="svga-row row-bodyzones">
+										<div id="svga-bodyzones"></div>
+									</div>
+								</div>												
+							</div>
+						</div>				
+					</div>				
+				</div>	
+				<div id="svga-start-overlay">&nbsp;</div>
+				<div id="svga-work-overlay">&nbsp;</div>
+				<div id="svga-loader"><p>please wait...</p></div>
+				<div id="svga-dialog" class="avatars-dialog">
+					<h3>Are you sure?</h3><p>The all current changes will be lost.</p>
+					<div id="svga-dialog-btns" class="avatars-dialog-btns">
+						<div id="svga-dialog-ok" class="avatars-dialog-ok avatars-dialog-btn narrow">Ok</div>
+						<div id="svga-dialog-cancel" class="avatars-dialog-cancel avatars-dialog-btn narrow">Cancel</div>
+					</div>
+				</div>
+				<div id="hash-dialog" class="avatars-dialog">
+					<span id="hash-dialog-content"></span>
+					<div id="hash-dialog-btns" class="hash-avatars-dialog-btns">
+						<div id="hash-dialog-ok" class="avatars-dialog-btn avatars-dialog-ok">Ok</div>
+					</div>
+				</div>
+				<div id="waiting-dialog" class="avatars-dialog">
+					<div class="spinner"></div>
+					<div class="waiting-message">Waiting for blockchain transaction processing...</div>
+				</div>
+				<div id="pkey-dialog" class="avatars-dialog">
+					<div class="your-balance">Your balance:</div> 
+					<div class="balance-spinner" id="balance-spinner"></div>
+					<span class="balance" id="balance"></span>
+					<div class="dialog-hr"></div>
+					<div class="your-balance">Avatars number you can create:</div> 
+					<span class="balance" id="avatars"></span>
+					<div class="dialog-hr"></div>
+					<input type="password" class="pkey-input" id="pkey-input" placeholder="Enter your private key" />
+					<div id="pkey-dialog-btns" class="avatars-dialog-btns">
+						<div id="pkey-dialog-ok" class="avatars-dialog-ok avatars-dialog-btn pkey">Ok</div>
+						<div id="pkey-dialog-cancel" class="avatars-dialog-cancel avatars-dialog-btn pkey">Cancel</div>
+					</div>
+					<div class="metamask-info">*You can use <a href="https://metamask.io">Metamask</a> extension for better security</div>
+				</div>	
+				<div id="svga-message">
+					<div id="svga-message-text"></div>
+					<div class="svga-close">Close</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<button id="svga-shareavatar" class="post-button">Post to blockchain</button>
+	</div>
+	<a class="share-help" target="_blank" href="https://live.ether.camp/account/0x5e49ec3fbd55e7b86a5a5b1a32c73aa44b42b4af">Live contract</a>
+	<div class="row">
+		<div class="svga-col-last-avatars recent-faces col-lg-12">
+			<div class="col-lg-offset-2 col-lg-8">
+				<div class="recent-faces">Recent faces</div>
+				<div id="last-avatars" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-offset-2 col-lg-8">
+			<div class="specification">Specification</div>
+		</div>
+	</div>
+	<div class="col-lg-12">
+			<div class="specification-desc">our smart contract is open for your review and recommendations</div>
+	</div>
+	<div class="contract-code col-lg-4 col-lg-offset-4 col-sm-10">
+		<pre class="language-javascript"><code class=" language-javascript">pragma solidity <span class="token operator">^</span><span class="token number">0.4</span><span class="token punctuation">.</span><span class="token number">3</span><span class="token punctuation">;</span>
+
+contract Avatars <span class="token punctuation">{</span>
+    
+    uint avatarsCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    struct Avatar <span class="token punctuation">{</span>
+        uint id<span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">/**
+         * Avatar's owner.
+         */</span> 
+        address owner<span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">/**
+         * First byte is gender, 1 / 0 for male / female. 
+         * Then every byte describe choosen avatar part. 
+         * The order is : backs, clothes, ears, eyebrows, eyesfront, eyesiris, faceshape, glasses, hair, mouth, nose, beard, mustache. 
+         */</span> 
+        bytes32 shapes<span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">/**
+         * Each 3 bytes describe color for 5 first shapes.
+         */</span>
+        bytes32 colorsPrimary<span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">/**
+         * Each 3 bytes describe color for 8 last shapes.
+         */</span>
+        bytes32 colorsSecondary<span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">/**
+         * Each byte describes up/down position for every shape. 
+         * High nibble depicts the sign of number, 1 - up, 0 - down.
+         * Low nibble shows number of steps to move the shape in selected direction.
+         * 
+         */</span>
+        bytes32 positions<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">mapping</span><span class="token punctuation">(</span>bytes32 <span class="token operator">=</span><span class="token operator">&gt;</span> Avatar<span class="token punctuation">)</span> avatars<span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">/**
+     * Stores an avatar on the blockchain.
+     * Throws if avatar with such shapes combination is already exists.
+     * 
+     * @param shapes - hex string, depicts gender and combinations of shapes.
+     * @param colorsPrimary - hex string, colors of the first 5 shapes.
+     * @param colorsSecondary - hex string, colors of the last 8 shapes.
+     * @param positions - hex string, up/down positions of all shapes
+     * 
+     * @return Hash of the avatar.
+     */</span>
+    <span class="token keyword">function</span> <span class="token function">register</span><span class="token punctuation">(</span>string shapes<span class="token punctuation">,</span> string colorsPrimary<span class="token punctuation">,</span> string colorsSecondary<span class="token punctuation">,</span> string positions<span class="token punctuation">)</span> returns <span class="token punctuation">(</span>bytes32 avatarHash<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        bytes32 shapesBytes <span class="token operator">=</span> <span class="token function">strToBytes</span><span class="token punctuation">(</span>shapes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        bytes32 colorsPrimaryBytes <span class="token operator">=</span> <span class="token function">strToBytes</span><span class="token punctuation">(</span>colorsPrimary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        bytes32 colorsSecondaryBytes <span class="token operator">=</span> <span class="token function">strToBytes</span><span class="token punctuation">(</span>colorsSecondary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        bytes32 positionsBytes <span class="token operator">=</span> <span class="token function">strToBytes</span><span class="token punctuation">(</span>positions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// unique by shapes composition</span>
+        bytes32 hash <span class="token operator">=</span> <span class="token function">sha3</span><span class="token punctuation">(</span>shapes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Avatar memory existingAvatar <span class="token operator">=</span> avatars<span class="token punctuation">[</span>hash<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>existingAvatar<span class="token punctuation">.</span>id <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span><span class="token punctuation">;</span>
+        
+        Avatar memory avatar <span class="token operator">=</span> <span class="token function">Avatar</span><span class="token punctuation">(</span><span class="token operator">++</span>avatarsCount<span class="token punctuation">,</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> 
+            shapesBytes<span class="token punctuation">,</span>
+            colorsPrimaryBytes<span class="token punctuation">,</span>
+            colorsSecondaryBytes<span class="token punctuation">,</span>
+            positionsBytes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        avatars<span class="token punctuation">[</span>hash<span class="token punctuation">]</span> <span class="token operator">=</span> avatar<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> hash<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment" spellcheck="true">/**
+     * Returns an avatar by it's hash.
+     * Throws if avatar is not exists.
+     */</span> 
+    <span class="token keyword">function</span> <span class="token keyword">get</span><span class="token punctuation">(</span>bytes32 avatarHash<span class="token punctuation">)</span> constant returns <span class="token punctuation">(</span>bytes32 shapes<span class="token punctuation">,</span> bytes32 colorsPrimary<span class="token punctuation">,</span> bytes32 colorsSecondary<span class="token punctuation">,</span> bytes32 positions<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Avatar memory avatar <span class="token operator">=</span> <span class="token function">getAvatar</span><span class="token punctuation">(</span>avatarHash<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        shapes <span class="token operator">=</span> avatar<span class="token punctuation">.</span>shapes<span class="token punctuation">;</span>
+        colorsPrimary <span class="token operator">=</span> avatar<span class="token punctuation">.</span>colorsPrimary<span class="token punctuation">;</span>
+        colorsSecondary <span class="token operator">=</span> avatar<span class="token punctuation">.</span>colorsSecondary<span class="token punctuation">;</span>
+        positions <span class="token operator">=</span> avatar<span class="token punctuation">.</span>positions<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment" spellcheck="true">/**
+     * Returns an avatar owner address by avatar's hash.
+     * Throws if avatar is not exists.
+     */</span> 
+    <span class="token keyword">function</span> <span class="token function">getOwner</span><span class="token punctuation">(</span>bytes32 avatarHash<span class="token punctuation">)</span> constant returns <span class="token punctuation">(</span>address<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Avatar memory avatar <span class="token operator">=</span> <span class="token function">getAvatar</span><span class="token punctuation">(</span>avatarHash<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> avatar<span class="token punctuation">.</span>owner<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+        
+    <span class="token comment" spellcheck="true">/**
+     * Returns if avatar of the given hash exists.
+     */</span> 
+    <span class="token keyword">function</span> <span class="token function">isExists</span><span class="token punctuation">(</span>bytes32 avatarHash<span class="token punctuation">)</span> constant returns <span class="token punctuation">(</span>bool<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Avatar memory avatar <span class="token operator">=</span> avatars<span class="token punctuation">[</span>avatarHash<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>avatar<span class="token punctuation">.</span>id <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment" spellcheck="true">/**
+     * Returns an avatar by it's hash.
+     * Throws if avatar is not exists.
+     */</span> 
+    <span class="token keyword">function</span> <span class="token function">getAvatar</span><span class="token punctuation">(</span>bytes32 avatarHash<span class="token punctuation">)</span> <span class="token keyword">private</span> constant returns <span class="token punctuation">(</span>Avatar<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Avatar memory avatar <span class="token operator">=</span> avatars<span class="token punctuation">[</span>avatarHash<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>avatar<span class="token punctuation">.</span>id <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+	       <span class="token keyword">throw</span><span class="token punctuation">;</span>
+	       
+        <span class="token keyword">return</span> avatar<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment" spellcheck="true">/**
+     * @dev Low level function.
+     * Converts string to bytes32 array.
+     * Throws if string length is more than 32 bytes
+     * 
+     * @param str string
+     * @return bytes32 representation of str
+     */</span>
+    <span class="token keyword">function</span> <span class="token function">strToBytes</span><span class="token punctuation">(</span>string str<span class="token punctuation">)</span> constant <span class="token keyword">private</span> returns <span class="token punctuation">(</span>bytes32 ret<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// var g = bytes(str).length;</span>
+        <span class="token comment" spellcheck="true">// if (bytes(str).length &gt; 32) throw;</span>
+        
+        assembly <span class="token punctuation">{</span>
+            ret <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token function">mload</span><span class="token punctuation">(</span><span class="token function">add</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span></code></pre>
+	</div>
+	<div class="row col-lg-12">
+		<a class="share-help" target="_blank" href="/contract">Open in a new tab</a>
+	</div>
+	<div class="row col-lg-12">
+		<div class="bottom-hr"></div>
+	</div>
+	<div class="row col-lg-12">
+		<img class="bottom-logo" src="/svgavatars/images/x2_cryptocamp_logo_light.png" />
+	</div>
+	<div class="row">
+		<div class="bottom-desc col-lg-12">This is a part of the crypto.camp development.</a>
+		<div class="bottom-desc">We would like to hear your thoughts about everything: texts, code, design, content, etc.</a>
+		<div class="bottom-desc">visit our main site to learn more</a>
+	</div>
+	<div class="row col-lg-12 center">
+		<a href='http://ether.camp' target="_blank"><i class="fa fa-slack social-bottom"></i></a>
+		<a href='https://github.com/ether-camp' target="_blank"><i class="fa fa-github social-bottom"></i></a>
+		<a href='https://www.reddit.com/r/Ethereum' target="_blank"><i class="fa fa-reddit social-bottom"></i></a>
+		<a href='mailto:contact@ether.camp' target="_blank"><i class="fa fa-envelope social-bottom"></i></a>
+	</div>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-93589745-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>svgAvatars - Online Vector Avatars Generator for Your Site</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta charset="utf-8">
+	<meta name="author" content="DeeThemes">
+	<meta itemprop="name" content="svgAvatars">
+	<meta name="description" itemprop="description" content="Your avatar persisted on the blockchain">
+
+	<link href="svgavatars/css/normalize.css" rel="stylesheet">
+	<link href="svgavatars/css/spectrum.css" rel="stylesheet">
+	<link href="svgavatars/css/svgavatars.css" rel="stylesheet">
+	<link href="svgavatars/css/prism-okaidia.css" rel="stylesheet">
+	
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	
+	<script src="svgavatars/js/jquery-1.10.2.min.js"></script>
+	<script src="svgavatars/js/svg.js"></script>
+
+	<script src='svgavatars/js/spectrum.js'></script>
+	<script src="svgavatars/js/jquery.scrollbar.js"></script>
+
+	<script src="svgavatars/js/canvg/rgbcolor.js"></script> 
+	<script src="svgavatars/js/canvg/StackBlur.js"></script>
+	<script src="svgavatars/js/canvg/canvg.js"></script>
+
+	<script src="svgavatars/js/bignumber-2.4.0.js"></script>
+	<script src="svgavatars/js/underscore-1.8.3.js"></script>
+
+</head>
+<body>
+	<pre class="language-javascript one-page"><code class=" language-javascript">pragma solidity <span class="token operator">^</span><span class="token number">0.4</span><span class="token punctuation">.</span><span class="token number">3</span><span class="token punctuation">;</span>
+
+contract Avatars <span class="token punctuation">{</span>
+    
+    uint avatarsCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    struct Avatar <span class="token punctuation">{</span>
+        uint id<span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">/**
+         * Avatar's owner.
+         */</span> 
+        address owner<span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">/**
+         * First byte is gender, 1 / 0 for male / female. 
+         * Then every byte describe choosen avatar part. 
+         * The order is : backs, clothes, ears, eyebrows, eyesfront, eyesiris, faceshape, glasses, hair, mouth, nose, beard, mustache. 
+         */</span> 
+        bytes32 shapes<span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">/**
+         * Each 3 bytes describe color for 5 first shapes.
+         */</span>
+        bytes32 colorsPrimary<span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">/**
+         * Each 3 bytes describe color for 8 last shapes.
+         */</span>
+        bytes32 colorsSecondary<span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">/**
+         * Each byte describes up/down position for every shape. 
+         * High nibble depicts the sign of number, 1 - up, 0 - down.
+         * Low nibble shows number of steps to move the shape in selected direction.
+         * 
+         */</span>
+        bytes32 positions<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">mapping</span><span class="token punctuation">(</span>bytes32 <span class="token operator">=</span><span class="token operator">&gt;</span> Avatar<span class="token punctuation">)</span> avatars<span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">/**
+     * Stores an avatar on the blockchain.
+     * Throws if avatar with such shapes combination is already exists.
+     * 
+     * @param shapes - hex string, depicts gender and combinations of shapes.
+     * @param colorsPrimary - hex string, colors of the first 5 shapes.
+     * @param colorsSecondary - hex string, colors of the last 8 shapes.
+     * @param positions - hex string, up/down positions of all shapes
+     * 
+     * @return Hash of the avatar.
+     */</span>
+    <span class="token keyword">function</span> <span class="token function">register</span><span class="token punctuation">(</span>string shapes<span class="token punctuation">,</span> string colorsPrimary<span class="token punctuation">,</span> string colorsSecondary<span class="token punctuation">,</span> string positions<span class="token punctuation">)</span> returns <span class="token punctuation">(</span>bytes32 avatarHash<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        bytes32 shapesBytes <span class="token operator">=</span> <span class="token function">strToBytes</span><span class="token punctuation">(</span>shapes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        bytes32 colorsPrimaryBytes <span class="token operator">=</span> <span class="token function">strToBytes</span><span class="token punctuation">(</span>colorsPrimary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        bytes32 colorsSecondaryBytes <span class="token operator">=</span> <span class="token function">strToBytes</span><span class="token punctuation">(</span>colorsSecondary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        bytes32 positionsBytes <span class="token operator">=</span> <span class="token function">strToBytes</span><span class="token punctuation">(</span>positions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// unique by shapes composition</span>
+        bytes32 hash <span class="token operator">=</span> <span class="token function">sha3</span><span class="token punctuation">(</span>shapes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Avatar memory existingAvatar <span class="token operator">=</span> avatars<span class="token punctuation">[</span>hash<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>existingAvatar<span class="token punctuation">.</span>id <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span><span class="token punctuation">;</span>
+        
+        Avatar memory avatar <span class="token operator">=</span> <span class="token function">Avatar</span><span class="token punctuation">(</span><span class="token operator">++</span>avatarsCount<span class="token punctuation">,</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> 
+            shapesBytes<span class="token punctuation">,</span>
+            colorsPrimaryBytes<span class="token punctuation">,</span>
+            colorsSecondaryBytes<span class="token punctuation">,</span>
+            positionsBytes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        avatars<span class="token punctuation">[</span>hash<span class="token punctuation">]</span> <span class="token operator">=</span> avatar<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> hash<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment" spellcheck="true">/**
+     * Returns an avatar by it's hash.
+     * Throws if avatar is not exists.
+     */</span> 
+    <span class="token keyword">function</span> <span class="token keyword">get</span><span class="token punctuation">(</span>bytes32 avatarHash<span class="token punctuation">)</span> constant returns <span class="token punctuation">(</span>bytes32 shapes<span class="token punctuation">,</span> bytes32 colorsPrimary<span class="token punctuation">,</span> bytes32 colorsSecondary<span class="token punctuation">,</span> bytes32 positions<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Avatar memory avatar <span class="token operator">=</span> <span class="token function">getAvatar</span><span class="token punctuation">(</span>avatarHash<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        shapes <span class="token operator">=</span> avatar<span class="token punctuation">.</span>shapes<span class="token punctuation">;</span>
+        colorsPrimary <span class="token operator">=</span> avatar<span class="token punctuation">.</span>colorsPrimary<span class="token punctuation">;</span>
+        colorsSecondary <span class="token operator">=</span> avatar<span class="token punctuation">.</span>colorsSecondary<span class="token punctuation">;</span>
+        positions <span class="token operator">=</span> avatar<span class="token punctuation">.</span>positions<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment" spellcheck="true">/**
+     * Returns an avatar owner address by avatar's hash.
+     * Throws if avatar is not exists.
+     */</span> 
+    <span class="token keyword">function</span> <span class="token function">getOwner</span><span class="token punctuation">(</span>bytes32 avatarHash<span class="token punctuation">)</span> constant returns <span class="token punctuation">(</span>address<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Avatar memory avatar <span class="token operator">=</span> <span class="token function">getAvatar</span><span class="token punctuation">(</span>avatarHash<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> avatar<span class="token punctuation">.</span>owner<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+        
+    <span class="token comment" spellcheck="true">/**
+     * Returns if avatar of the given hash exists.
+     */</span> 
+    <span class="token keyword">function</span> <span class="token function">isExists</span><span class="token punctuation">(</span>bytes32 avatarHash<span class="token punctuation">)</span> constant returns <span class="token punctuation">(</span>bool<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Avatar memory avatar <span class="token operator">=</span> avatars<span class="token punctuation">[</span>avatarHash<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>avatar<span class="token punctuation">.</span>id <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment" spellcheck="true">/**
+     * Returns an avatar by it's hash.
+     * Throws if avatar is not exists.
+     */</span> 
+    <span class="token keyword">function</span> <span class="token function">getAvatar</span><span class="token punctuation">(</span>bytes32 avatarHash<span class="token punctuation">)</span> <span class="token keyword">private</span> constant returns <span class="token punctuation">(</span>Avatar<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Avatar memory avatar <span class="token operator">=</span> avatars<span class="token punctuation">[</span>avatarHash<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>avatar<span class="token punctuation">.</span>id <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+           <span class="token keyword">throw</span><span class="token punctuation">;</span>
+           
+        <span class="token keyword">return</span> avatar<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment" spellcheck="true">/**
+     * @dev Low level function.
+     * Converts string to bytes32 array.
+     * Throws if string length is more than 32 bytes
+     * 
+     * @param str string
+     * @return bytes32 representation of str
+     */</span>
+    <span class="token keyword">function</span> <span class="token function">strToBytes</span><span class="token punctuation">(</span>string str<span class="token punctuation">)</span> constant <span class="token keyword">private</span> returns <span class="token punctuation">(</span>bytes32 ret<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// var g = bytes(str).length;</span>
+        <span class="token comment" spellcheck="true">// if (bytes(str).length &gt; 32) throw;</span>
+        
+        assembly <span class="token punctuation">{</span>
+            ret <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token function">mload</span><span class="token punctuation">(</span><span class="token function">add</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span></code></pre>
+<script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-93589745-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</body>
+</html>
+
+
+
