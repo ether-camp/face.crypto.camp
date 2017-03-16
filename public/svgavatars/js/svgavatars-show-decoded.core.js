@@ -27,41 +27,7 @@ decoded[3] = decoded[3].data;
 var path_to_folder = '/svgavatars/',//the path to main SVG Avatars folder from root dir of your site. The slashes "/" are important!
 	delta_sat = 0.1, //the step of saturation color change in HSV (HSB) mode (10% by default)
 	delta_val = 0.06, //the step of value (brightness) color change in HSV (HSB) mode (6% by default)
-	save_format = 'png', //must be exactly 'png' or 'svg' for storing on a server
-	save_size = 200, //the dimentions for avatar stored on a server (pixels)
-	svg_download_size = 600, //the conditional dimentions of SVG file when download by user (pixels)
-	png_one_download_size = 200, //the dimentions of first option PNG file when download by user (pixels)
-	png_two_download_size = 400, //the dimentions of second option PNG file when download by user (pixels)
-	png_ios_download_size = 500, //the dimentions of PNG file when download by user on iOS devices (pixels)
-	png_win8tablet_download_size = 400, //the dimentions of PNG file when download by user on Win8 phones and tablets (pixels)
-	gravatar_size = 200,//the dimentions of PNG file for Gravatar service (pixels)
-	hide_save = true, //true will disable save on your server option
-	hide_svg_download_on_Android = true, //true will disable download SVG option on Android devices (not useful)
-	hide_svg_download = true, //true will disable download SVG option
-	hide_png_one_download = false, //true will disable download PNG with first dimensions
-	hide_png_two_download = false, //true will disable download PNG with second dimensions
-	hide_gravatar = false, //true will disable the possibility to install created avatar as gravatar
 	color_theme = 'dark'; //must be exactly 'light' or 'dark'
-
-//Share options
-var	hide_share = false, //true will disable share option
-	share_image_size = 500, //the dimentions of PNG file for share with Social networks (pixels)
-	facebook_app_id = 'replace me!', //you must have an Facebook's App ID for correct work of share function (https://developers.facebook.com/apps)
-	facebook = true, //false will disable Facebook share option
-	twitter = true, //false will disable Twitter share option
-	pinterest = true, //false will disable Pinterest share option
-	googleplus = true, //false will disable Google Plus share option
-	share_link = document.URL, //will be an URL of a HTML page where the generator is placed
-	share_title = document.title, //will be the title tag of a HTML page where the generator is placed
-	share_description = '', //if you leave it blank, it might be taken from your meta description tag
-	share_credit = 'Created on YourSite.com';//replase YourSite.com with yours or leave it blank (do NOT delete variable itself!), if you don't want a watermark on avatar for Social share
-
-//Calling the func with translation.
-//It must be defined in HTML file above this file like so:
-//<script src="svgavatars/js/svgavatars.??.js"></script>
-//<script src="svgavatars/js/svgavatars.core.js"></script>
-//where ?? are 2 letters of language code
-svgAvatarsTranslation(png_one_download_size, png_two_download_size);	
 
 //Extend SVGJS lib with special methods for controls
 SVG.extend(SVG.Element, {
@@ -500,42 +466,6 @@ if (gender === 'boys') {
 };
 $('#svga-blocks-clothes').data('bodyzones', 'clothes');
 
-//creating zones: shapes, mouths, eyes, clothes, etc.
-for (var cur_zone in data) {
-	if (data.hasOwnProperty(cur_zone)) {
-		$('#svga-bodyzones').append('<div id="svga-bodyzones-'+cur_zone+'" class="svga-bodyzones" data-bodyzone="'+cur_zone+'" data-controls="'+data[cur_zone].controls+'" data-block="'+data[cur_zone].block+'">'+body_zone_titles[cur_zone]+'</div>');
-		$('#svga-bodyzones-'+cur_zone).hide();
-	};
-};
-
-//creating controls (left, right, scale, etc.)
-for (var cont in icons_data) {
-	if (icons_data.hasOwnProperty(cont)) {
-		if (control_names.indexOf(cont) > -1) {
-			$('#svga-controls').append('<div id="svga-controls-'+cont+'" class="svga-controls"><svg class="svga-control-icon" xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16" preserveAspectRatio="xMinYMin meet"><path class="svga-control-icon-path" d="'+ icons_data[cont] +'"/></svg></div>');
-			$('#svga-controls-'+cont).hide();
-		};
-	};
-};
-
-//creating global controls (left, right, scale, etc.)
-for (var cont in icons_data) {
-	if (icons_data.hasOwnProperty(cont)) {
-		if (glob_control_names.indexOf(cont) > -1) {
-			$('#svga-glob-controls').append('<div id="svga-glob-controls-'+cont+'" class="svga-glob-controls"><svg class="svga-control-icon" xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16" preserveAspectRatio="xMinYMin meet"><path class="svga-control-icon-path" d="'+ icons_data[cont] +'"/></svg></div>');
-		};
-	};
-};
-
-//creating icons in menu (random, reset, save, download)
-for (var i = 0; i < menu_names.length; i++) {
-	$('#svga-'+menu_names[i]+'avatar > div').append('<svg class="svga-menu-icon" xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28 28" preserveAspectRatio="xMinYMin meet"><path class="svga-menu-icon-path" d="'+ icons_data[menu_names[i]] +'"/></svg>');
-};
-
-//creating socials icons svga-facebook-icon
-for (var i = 0; i < share_names.length; i++) {
-	$('#svga-'+share_names[i]+'-icon').append('<svg class="svga-share-icons" xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" preserveAspectRatio="xMinYMin meet"><path class="svga-share-icons-path" fill="' + share_colors[i] + '" d="'+ icons_data[share_names[i]] +'"/></svg>');
-};
 
 //first initial drawing on SVG canvas
 var shapes_counter = 0;
